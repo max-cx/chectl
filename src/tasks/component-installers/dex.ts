@@ -115,9 +115,8 @@ export class DexTasks {
                   certs.add(certManager.getCreateCertificateIssuerTasks())
 
                   const domain = 'dex.' + this.flags.domain
-                  const commonName = '*.' + domain
-                  const dnsNames = [domain, commonName]
-                  certs.add(certManager.getGenerateCertificatesTasks(this.flags, commonName, dnsNames, DexTasks.TLS_SECRET_NAME, DexTasks.NAMESPACE_NAME))
+                  const dnsNames = [domain, '*.' + domain]
+                  certs.add(certManager.getGenerateCertificatesTasks(dnsNames, DexTasks.TLS_SECRET_NAME, DexTasks.NAMESPACE_NAME))
                 }
 
                 certs.add([{

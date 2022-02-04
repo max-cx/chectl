@@ -17,11 +17,19 @@ metadata:
   namespace: che
 spec:
   secretName: che-tls
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - Eclipse Che
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  dnsNames:
+    - '*.<domain>'
   issuerRef:
     name: che-cluster-issuer
     kind: ClusterIssuer
-  # This is a template and it will be set from --domain parameter
-  # For example: '*.192.168.99.100.nip.io'
-  commonName: '*.<domain>'
-  dnsNames:
-    - '*.<domain>'
+    group: cert-manager.io
